@@ -15,6 +15,7 @@ let deck = [];
 const typeOfCarts = ['C', 'D', 'H', 'S'];
 const cartSpecial = ['A', 'J', 'Q', 'K'];
 
+// Creamos una nueva baraja:
 const createDeck = () => {
   for (let i = 2; i <= 10; i++) {
     for (let type of typeOfCarts) {
@@ -27,10 +28,19 @@ const createDeck = () => {
       deck.push(special + type);
     }
   }
-  console.log(deck);
   deck = _.shuffle(deck);
   console.log(deck);
   return deck;
 };
 
 createDeck();
+
+// Esta funcion me permite tomar una carta:
+// Tomamos un carta del monton y la devolvemos y la quitamos del monton:
+const pedirCarta = () => {
+  if (deck.length === 0) {
+    throw 'No hay carta en el deck';
+  }
+  const cart = deck.pop();
+  return cart;
+};
