@@ -44,3 +44,11 @@ const pedirCarta = () => {
   const cart = deck.pop();
   return cart;
 };
+
+// Funcion que saca la carta que viene:
+const cartValue = (card) => {
+  const value = card.substring(0, card.length - 1);
+  return isNaN(value) ? (value === 'A' ? 11 : 10) : parseInt(value);
+};
+
+const value = cartValue(pedirCarta());
