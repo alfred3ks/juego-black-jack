@@ -11,25 +11,32 @@ Usaremos el método .shuffle(), recibe un arreglo como parametro y lo retorna ot
 Esta libreria es usada para desordenar el contenido de una array. Vamos a su web y descargamos su version de produccion y lo guardamos en un archivo llamado js/underscore.min.js.
 Debe estar desordada ya que cuando se den cartas estas deben ir como cuando barajamos. Luego la importamos en el index.html.
 */
+
+// Referencias del HTML:
+const btnPedir = document.querySelector('#btnPedir');
+let puntos = document.querySelectorAll('small');
+
 let deck = [];
-const typeOfCarts = ['C', 'D', 'H', 'S'];
-const cartSpecial = ['A', 'J', 'Q', 'K'];
+const tiposDeCartas = ['C', 'D', 'H', 'S'];
+const cartasEspeciales = ['A', 'J', 'Q', 'K'];
+
+let puntosJugador = 0;
+let puntosComputadoras = 0;
 
 // Creamos una nueva baraja:
 const createDeck = () => {
   for (let i = 2; i <= 10; i++) {
-    for (let type of typeOfCarts) {
-      deck.push(i + type);
+    for (let tipo of tiposDeCartas) {
+      deck.push(i + tipo);
     }
   }
 
-  for (let type of typeOfCarts) {
-    for (let special of cartSpecial) {
-      deck.push(special + type);
+  for (let tipo of tiposDeCartas) {
+    for (let especial of cartasEspeciales) {
+      deck.push(especial + tipo);
     }
   }
   deck = _.shuffle(deck);
-  console.log(deck);
   return deck;
 };
 
@@ -41,14 +48,24 @@ const pedirCarta = () => {
   if (deck.length === 0) {
     throw 'No hay carta en el deck';
   }
-  const cart = deck.pop();
-  return cart;
+  const carta = deck.pop();
+  return carta;
 };
 
 // Funcion que saca la carta que viene:
-const cartValue = (card) => {
-  const value = card.substring(0, card.length - 1);
-  return isNaN(value) ? (value === 'A' ? 11 : 10) : parseInt(value);
+const valorDeLacarta = (carta) => {
+  const valor = carta.substring(0, carta.length - 1);
+  return isNaN(valor) ? (valor === 'A' ? 11 : 10) : parseInt(valor);
 };
 
-const value = cartValue(pedirCarta());
+const valor = valorDeLacarta(pedirCarta());
+
+// Evento click de los botones:
+btnPedir.addEventListener('click', () => {
+  // Tomamos una carta:
+  const carta = pedirCarta();
+  puntosJugador = puntosJugador + valorDeLacarta(carta);
+  puntos[0].innerText = puntosJugador;
+
+  // Mostramos la carta:
+});
