@@ -14,6 +14,7 @@ Debe estar desordada ya que cuando se den cartas estas deben ir como cuando bara
 
 // Referencias del HTML:
 const btnPedir = document.querySelector('#btnPedir');
+const btnDetener = document.querySelector('#btnDetener');
 let puntos = document.querySelectorAll('small');
 const divCartasJugador = document.querySelector('#jugador-cartas');
 const divCartasComputadora = document.querySelector('#computadora-cartas');
@@ -23,7 +24,7 @@ const tiposDeCartas = ['C', 'D', 'H', 'S'];
 const cartasEspeciales = ['A', 'J', 'Q', 'K'];
 
 let puntosJugador = 0;
-let puntosComputadoras = 0;
+let puntosComputadora = 0;
 
 // Creamos una nueva baraja:
 const createDeck = () => {
@@ -60,7 +61,24 @@ const valorDeLacarta = (carta) => {
   return isNaN(valor) ? (valor === 'A' ? 11 : 10) : parseInt(valor);
 };
 
-// const valor = valorDeLacarta(pedirCarta());
+// Turno de la computadora:
+const turnoComputadora = (puntosMinimos) => {
+  do {
+    // Tomamos una carta:
+    const carta = pedirCarta();
+    puntosComputadora = puntosComputadora + valorDeLacarta(carta);
+    puntos[1].innerText = puntosComputadora;
+
+    // Mostramos la carta en el HTML:
+    const imgCarta = document.createElement('img');
+    imgCarta.src = `assets/cartas/${carta}.png`;
+    imgCarta.classList.add('carta');
+    divCartasComputadora.append(imgCarta);
+    if (puntosMinimos > 21) {
+      break;
+    }
+  } while (puntosComputadora < puntosMinimos && puntosMinimos <= 21);
+};
 
 // Evento click de los botones:
 btnPedir.addEventListener('click', () => {
@@ -79,8 +97,17 @@ btnPedir.addEventListener('click', () => {
   if (puntosJugador > 21) {
     alert('Lo siento has superado 21, perdiste');
     btnPedir.disabled = true;
+    btnDetener.disabled = true;
+    // turnoComputadora(puntosJugador);
   } else if (puntosJugador === 21) {
     alert('Tienes 21!!!');
     btnPedir.disabled = true;
+    btnDetener.disabled = true;
   }
+});
+
+btnDetener.addEventListener('click', () => {
+  btnPedir.disabled = true;
+  btnDetener.disabled = true;
+  turnoComputadora(puntosJugador);
 });
