@@ -1,5 +1,4 @@
 .body {
-  margin: 0;
   background-color: #2f4f30;
   color: white;
 }
@@ -8,16 +7,51 @@
   text-align: center;
   background-color: black;
   color: white;
-  padding: 20px;
+  padding: 25px;
 }
 
 .title h1 {
-  font-size: 25px;
+  font-size: 2.2rem;
 }
 
-.jugador h1 {
-  font-size: 22px;
+.container-btn {
+  min-width: 300px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  background-color: #2a97f0;
+  color: white;
+  border: none;
+  padding: 15px 7px;
+  font-size: 1.4rem;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.btn-nuevo {
+  background-color: crimson;
+}
+
+.disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.container-cards {
+  width: 100%;
+  min-width: 300px;
+  padding: 0 10px;
+}
+
+.container-cards h2 {
   margin: 10px 0;
+  font-size: 2.2rem;
 }
 
 .carta {
@@ -27,7 +61,21 @@
   width: 100px;
 }
 
-#computadora-cartas,
-#jugador-cartas {
+.cartas {
   height: 160px;
+}
+
+@media screen and (width >=768px) {
+  .container-cards {
+    width: 450px;
+    margin: 0 auto;
+  }
+
+  .carta {
+    width: 120px;
+  }
+
+  .cartas {
+    height: 200px;
+  }
 }

@@ -3,38 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/reset.css">
   <link rel="stylesheet" href="./assets/css/style.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <title>BlackJack</title>
+  <title>Black Jack</title>
 </head>
 <body class="body">
   <header class="title">
-    <h1>Black Jack</h1>
+    <h1>Juego de Black Jack</h1>
   </header>
 
-  <div class="row mt-2">
-    <div class="col text-center" id="btn">
-      <button id="btnNuevo" class="btn btn-danger">Nuevo juego</button>
-      <button id="btnPedir" class="btn btn-primary">Pedir carta</button>
-      <button id="btnDetener" class="btn btn-primary">Detener</button>
-    </div>
+  <div class="container-btn">
+    <button id="btnNuevo" class="btn-nuevo btn">Nuevo juego</button>
+    <button id="btnPedir" class="btn">Pedir carta</button>
+    <button id="btnDetener" class="btn">Detener</button>
   </div>
 
-  <div class="row container">
-    <div class="col jugador">
-      <h1>Jugador: <small id="puntos-jugador">0</small>
-      </h1>
-      <div id="jugador-cartas">
-      </div>
+  <div class="container-cards">
+    <h2>Jugador: <small id="puntos-jugador">0</small></h2>
+    <div class="cartas" id="jugador-cartas">
     </div>
-  </div>
 
-  <div class="row container">
-    <div class="col jugador">
-      <h1>Computadora: <small>0</small></h1>
-      <div id="computadora-cartas">
-      </div>
+    <h2>Computadora: <small>0</small></h2>
+    <div class="cartas" id="computadora-cartas">
     </div>
   </div>
 

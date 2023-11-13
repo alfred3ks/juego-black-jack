@@ -15,6 +15,7 @@ Debe estar desordada ya que cuando se den cartas estas deben ir como cuando bara
 // Referencias del HTML:
 const btnPedir = document.querySelector('#btnPedir');
 const btnDetener = document.querySelector('#btnDetener');
+const btnNuevo = document.querySelector('#btnNuevo');
 let puntos = document.querySelectorAll('small');
 const divCartasJugador = document.querySelector('#jugador-cartas');
 const divCartasComputadora = document.querySelector('#computadora-cartas');
@@ -78,6 +79,20 @@ const turnoComputadora = (puntosMinimos) => {
       break;
     }
   } while (puntosComputadora < puntosMinimos && puntosMinimos <= 21);
+
+  setTimeout(() => {
+    if (puntosComputadora === puntosMinimos) {
+      alert('Empate, nadie gana. 😂');
+    } else if (puntosMinimos > 21) {
+      alert('Gana computadora.');
+    } else if (puntosComputadora > 21) {
+      alert('Jugador gana. 😎');
+    } else if (puntosMinimos < puntosComputadora && puntosComputadora === 21) {
+      alert('Gana computadora, 21 Black Jack!!!');
+    } else if (puntosMinimos < puntosComputadora) {
+      alert('Gana computadora.🤡');
+    }
+  }, 100);
 };
 
 // Evento click de los botones:
@@ -95,19 +110,32 @@ btnPedir.addEventListener('click', () => {
 
   // Evaluamos la condición si gana o pierde:
   if (puntosJugador > 21) {
-    alert('Lo siento has superado 21, perdiste');
-    btnPedir.disabled = true;
-    btnDetener.disabled = true;
-    // turnoComputadora(puntosJugador);
+    setTimeout(() => {
+      btnPedir.disabled = true;
+      btnDetener.disabled = true;
+      btnDetener.classList.toggle('disabled');
+      btnPedir.classList.toggle('disabled');
+      alert('Superaste 21, la computadora gana.');
+    }, 100);
   } else if (puntosJugador === 21) {
-    alert('Tienes 21!!!');
-    btnPedir.disabled = true;
-    btnDetener.disabled = true;
+    setTimeout(() => {
+      btnPedir.disabled = true;
+      btnDetener.disabled = true;
+      btnDetener.classList.toggle('disabled');
+      btnPedir.classList.toggle('disabled');
+      alert('Jugador gana, Black Jack!!!');
+    }, 100);
   }
 });
 
 btnDetener.addEventListener('click', () => {
   btnPedir.disabled = true;
   btnDetener.disabled = true;
+  btnDetener.classList.toggle('disabled');
+  btnPedir.classList.toggle('disabled');
   turnoComputadora(puntosJugador);
+});
+
+btnNuevo.addEventListener('click', () => {
+  location.reload();
 });
