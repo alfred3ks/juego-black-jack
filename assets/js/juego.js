@@ -15,6 +15,8 @@ Debe estar desordada ya que cuando se den cartas estas deben ir como cuando bara
 // Referencias del HTML:
 const btnPedir = document.querySelector('#btnPedir');
 let puntos = document.querySelectorAll('small');
+const divCartasJugador = document.querySelector('#jugador-cartas');
+const divCartasComputadora = document.querySelector('#computadora-cartas');
 
 let deck = [];
 const tiposDeCartas = ['C', 'D', 'H', 'S'];
@@ -58,7 +60,7 @@ const valorDeLacarta = (carta) => {
   return isNaN(valor) ? (valor === 'A' ? 11 : 10) : parseInt(valor);
 };
 
-const valor = valorDeLacarta(pedirCarta());
+// const valor = valorDeLacarta(pedirCarta());
 
 // Evento click de los botones:
 btnPedir.addEventListener('click', () => {
@@ -67,5 +69,18 @@ btnPedir.addEventListener('click', () => {
   puntosJugador = puntosJugador + valorDeLacarta(carta);
   puntos[0].innerText = puntosJugador;
 
-  // Mostramos la carta:
+  // Mostramos la carta en el HTML:
+  const imgCarta = document.createElement('img');
+  imgCarta.src = `assets/cartas/${carta}.png`;
+  imgCarta.classList.add('carta');
+  divCartasJugador.append(imgCarta);
+
+  // Evaluamos la condición si gana o pierde:
+  if (puntosJugador > 21) {
+    alert('Lo siento has superado 21, perdiste');
+    btnPedir.disabled = true;
+  } else if (puntosJugador === 21) {
+    alert('Tienes 21!!!');
+    btnPedir.disabled = true;
+  }
 });
